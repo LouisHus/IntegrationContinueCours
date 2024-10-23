@@ -4,7 +4,7 @@ import csv
 
 path = os.path.dirname(os.path.dirname(__file__))
 output_path = os.path.dirname(__file__) + "/result/"
-name_file_member_association = "None"
+name_file_member_association = []
 event_association = []
 
 def loadFiles():
@@ -62,7 +62,7 @@ def loadCSV(file):
             html_body = html_body + f"<div>Prénom : {name}\nNom : {lastname}\nEmail : {email}\nFonction : {fonction}</div>"
 
         nameFile = os.path.basename(file).split('/')[-1].replace(".csv", ".html")
-        name_file_member_association = file.replace(".csv", ".html")
+        name_file_member_association.append(output_path + nameFile)
         with open(output_path + nameFile, "w", encoding="utf-8") as f:
             html_complete = f"""
                     <!DOCTYPE html>
@@ -94,7 +94,7 @@ def loadIndex():
                 </head>
                 <body>
                     <h1>Actualités de l'association</h1>
-                    <div><a href="/{name_file_member_association}">membre du bureau de l'association</a></div>
+                    <div><a href="/{name_file_member_association[0]}">membre du bureau de l'association</a></div>
                     {s}
                 </body>
                 </html>
